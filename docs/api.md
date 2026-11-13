@@ -111,6 +111,49 @@ Body `POST /reports/generate`:
 - `costColumn` opsional — profit hanya dihitung bila diisi
 - Laporan berisi: KPI, tabel analisis, insight (berlabel `Fakta:`), rekomendasi (berlabel `Saran:`), keterbatasan
 
+## Conversations / AI Chat
+
+Semua endpoint memerlukan JWT. Untuk analisis memerlukan `OPENAI_API_KEY` ter-set di backend; jika kosong, chat mengembalikan 503.
+
+| Method | Path | Deskripsi |
+|---|---|---|
+| GET | `/conversations` | Daftar percakapan user (urut terbaru) |
+| POST | `/conversations` | Buat percakapan baru (`{title?, datasetId?}`) |
+| GET | `/conversations/:id` | Detail + seluruh pesan |
+| DELETE | `/conversations/:id` | Hapus percakapan |
+| POST | `/conversations/chat` | Kirim pertanyaan → percakapan baru otomatis dibuat (`{message, datasetId?}`) |
+| POST | `/conversations/:id/chat` | Kirim pertanyaan ke percakapan existing |
+
+Contoh chat:
+
+```json
+POST /conversations/chat
+{ "message": "Apa tren penjualan bulanan 6 bulan terakhir?", "datasetId": "uuid" }
+```
+
+Respons:
+
+```json
+{
+  "conversationId": "uuid",
+  "assistantMessage": {
+    "role": "assistant",
+    "content": "ringkasan jawaban",
+    "data": {
+      "text": "...",
+      "kpis": [{ "label": "Total Revenue", "value": "123.456.789" }],
+      "table": { "columns": ["Bulan", "Revenue"], "rows": [["2025-06", 15000000]] },
+      "chart": { "type": "line", "xKey": "bulan", "seriesKeys": ["revenue"], "data": [...] },
+      "source": { "dataset": "Penjualan 2025", "tool": "trend_series" }
+    }
+  }
+}
+```
+
+- `datasetId` opsional jika hanya ada satu dataset; jika tidak ada dataset sama sekali respons 400.
+- Asisten hanya boleh menggunakan angka dari hasil tool analisis backend (tidak mengarang).
+- Tool tersedia: `dataset_info`, `summary_kpi`, `group_breakdown`, `trend_series`, `growth`, `forecast`, `customer_segmentation`, `anomaly_detection`, `run_sql` (query speck read-only, whitelist kolom dataset, limit maks 200 baris).
+
 ## Format Error
 
 Error NestJS standar:

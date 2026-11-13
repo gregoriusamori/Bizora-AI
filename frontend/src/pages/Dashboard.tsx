@@ -19,7 +19,9 @@ export default function Dashboard() {
                     ? '/dashboard/predictive'
                     : item === 'Reports'
                       ? '/dashboard/reports'
-                      : '/dashboard'
+                      : item === 'AI Chat'
+                        ? '/dashboard/chat'
+                        : '/dashboard'
                 }
                 className="block rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-100"
               >

@@ -2,6 +2,7 @@
 
 PostgreSQL via Prisma ORM. Schema sumber: `backend/prisma/schema.prisma`.
 Migrasi SQL awal: `backend/prisma/migrations/0001_init/migration.sql`.
+Migrasi percakapan: `backend/prisma/migrations/0002_conversations/migration.sql`.
 
 ## Tabel
 
@@ -16,6 +17,8 @@ Migrasi SQL awal: `backend/prisma/migrations/0001_init/migration.sql`.
 | `semantic_models` | Semantic layer per dataset (konfigurasi arti kolom) |
 | `semantic_mappings` | Pemetaan `source_column → target_column` + `meaning` (mis. `sales_amount = total penjualan`) |
 | `metric_definitions` | Definisi rumus KPI per semantic model |
+| `conversations` | Riwayat percakapan AI Chat per user + dataset aktif |
+| `messages` | Pesan dalam percakapan (role user/assistant, payload terstruktur JSONB di `data`) |
 
 ## Pola Dynamic Schema
 

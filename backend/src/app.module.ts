@@ -12,6 +12,7 @@ import { ForecastingModule } from './modules/forecasting/forecasting.module.js';
 import { ClusteringModule } from './modules/clustering/clustering.module.js';
 import { AnomalyDetectionModule } from './modules/anomaly-detection/anomaly-detection.module.js';
 import { ReportingModule } from './modules/reporting/reporting.module.js';
+import { ConversationsModule } from './modules/conversations/conversations.module.js';
 import { HealthController } from './common/health.controller.js';
 import { HealthService } from './common/health.service.js';
 import { PrismaModule } from './common/prisma.module.js';
@@ -33,6 +34,7 @@ import { PrismaModule } from './common/prisma.module.js';
     ClusteringModule,
     AnomalyDetectionModule,
     ReportingModule,
+    ConversationsModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService, HealthService],
