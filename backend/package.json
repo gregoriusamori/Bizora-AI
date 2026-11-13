@@ -33,13 +33,12 @@
     "pdfkit": "^0.20.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "xlsx": "^0.18.5"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {
     "@nestjs/cli": "^12.0.0",
     "@nestjs/config": "^12.1.1",
     "@nestjs/jwt": "^12.0.4",
-    "@nestjs/mau": "^0.2.6",
     "@nestjs/passport": "^12.0.1",
     "@nestjs/schematics": "^12.0.0",
     "@nestjs/testing": "^12.0.1",

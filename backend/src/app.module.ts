@@ -14,7 +14,7 @@ import { AnomalyDetectionModule } from './modules/anomaly-detection/anomaly-dete
 import { ReportingModule } from './modules/reporting/reporting.module.js';
 import { HealthController } from './common/health.controller.js';
 import { HealthService } from './common/health.service.js';
-import { PrismaService } from './common/prisma.service.js';
+import { PrismaModule } from './common/prisma.module.js';
 
 @Module({
   imports: [
@@ -22,6 +22,7 @@ import { PrismaService } from './common/prisma.service.js';
       isGlobal: true,
       envFilePath: ['.env', '.env'],
     }),
+    PrismaModule,
     AuthModule,
     UsersModule,
     DatasetsModule,
@@ -34,6 +35,6 @@ import { PrismaService } from './common/prisma.service.js';
     ReportingModule,
   ],
   controllers: [AppController, HealthController],
-  providers: [AppService, HealthService, PrismaService],
+  providers: [AppService, HealthService],
 })
 export class AppModule {}
