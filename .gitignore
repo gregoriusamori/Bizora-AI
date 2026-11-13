@@ -1,0 +1,19 @@
+node_modules
+.env
+.env.*
+!.env.example
+dist
+*.log
+*.tsbuildinfo
+
+# generated prisma client
+backend/generated
+
+# user uploads & generated reports (data tidak di-commit)
+storage/uploads/*
+storage/reports/*
+!storage/uploads/.gitkeep
+!storage/reports/.gitkeep
+.claude/
+.windsurf/
+.agents/

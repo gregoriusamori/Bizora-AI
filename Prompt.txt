@@ -1,0 +1,1063 @@
+# PROJECT: AI BUSINESS INTELLIGENCE PLATFORM
+## Intelligent Business Analytics, Conversational AI & Decision Support System
+
+Saya ingin membangun sebuah aplikasi **AI Business Intelligence Platform** yang berfungsi sebagai sistem analisis bisnis cerdas. Aplikasi ini harus mampu mengolah data perusahaan, menganalisis performa bisnis, menampilkan visualisasi interaktif, serta memungkinkan pengguna melakukan analisis menggunakan percakapan bahasa alami dengan AI.
+
+Project ini bukan sekadar chatbot biasa atau dashboard statistik. Saya ingin membangun sistem BI modern yang menggabungkan Business Intelligence, Artificial Intelligence, Data Analytics, Predictive Analytics, dan Conversational AI dalam satu platform.
+
+Tujuan utamanya adalah membantu perusahaan, pemilik bisnis, manajer, dan analis mengambil keputusan berdasarkan data aktual.
+
+---
+
+# 1. ANALISIS PROJECT SEBELUM CODING
+
+Sebelum melakukan coding:
+
+1. Periksa seluruh isi root folder project.
+2. Baca dan pahami README.md jika tersedia.
+3. Baca planning.md jika tersedia.
+4. Periksa dataset yang tersedia di folder project.
+5. Identifikasi struktur kolom, tipe data, relasi, dan karakteristik dataset.
+6. Identifikasi kebutuhan bisnis dan fitur yang harus dikembangkan.
+7. Jangan mengasumsikan dataset hanya memiliki struktur tertentu.
+
+Jika file README.md atau planning.md belum tersedia, buat rancangan kebutuhan sistem berdasarkan spesifikasi dalam prompt ini.
+
+Dataset yang tersedia hanya menjadi contoh dan referensi pengembangan. Sistem harus mampu menerima dataset baru dengan struktur tabel, kolom, dan format yang berbeda.
+
+Jangan langsung melakukan coding sebelum menyampaikan rancangan arsitektur dan mendapatkan persetujuan saya.
+
+# 2. TECHNOLOGY STACK
+
+Gunakan teknologi berikut:
+
+## Backend
+- Node.js.
+- NestJS sebagai framework backend utama.
+- REST API.
+- Socket.IO atau Server-Sent Events untuk streaming respons AI jika diperlukan.
+- Prisma ORM.
+- Zod atau class-validator untuk validasi.
+- Winston atau Pino untuk logging.
+
+## Frontend
+- React.js.
+- Vite.
+- TypeScript.
+- Tailwind CSS.
+- Shadcn/UI.
+- Lucide React.
+- Recharts atau Apache ECharts.
+- Zustand untuk state management.
+
+## Database
+- PostgreSQL.
+- Prisma ORM.
+- pgvector untuk vector search jika dibutuhkan.
+- Database migration.
+- Database indexing.
+
+## Artificial Intelligence
+- OpenAI API.
+- Google Gemini API.
+- Provider AI lainnya melalui abstraction layer.
+- LLM untuk conversational analytics.
+- Text-to-SQL untuk analisis database.
+- RAG untuk analisis dokumen pendukung bisnis.
+- AI Agent dan tool calling untuk menjalankan analisis.
+
+Seluruh API key harus menggunakan environment variable dan tidak boleh disimpan di frontend.
+
+# 3. CORE FEATURES
+
+## A. AI BUSINESS INTELLIGENCE ENGINE
+
+Buat engine analisis bisnis yang dapat mengolah data perusahaan dan menghasilkan insight secara otomatis.
+
+Kemampuan utama:
+
+1. Sales Analysis.
+2. Revenue Analysis.
+3. Profit Analysis.
+4. Product Performance Analysis.
+5. Customer Analysis.
+6. Branch Performance Analysis.
+7. Regional Analysis.
+8. Inventory Analysis jika data tersedia.
+9. Business Trend Analysis.
+10. Growth Analysis.
+11. Period Comparison.
+12. KPI Analysis.
+13. Forecasting.
+14. Anomaly Detection.
+15. Business Recommendation.
+
+Sistem harus dapat menganalisis data berdasarkan:
+- Harian.
+- Mingguan.
+- Bulanan.
+- Triwulanan.
+- Tahunan.
+- Rentang tanggal khusus.
+
+Jangan mengasumsikan semua dataset memiliki kolom yang sama. Buat konfigurasi pemetaan kolom dan metrik agar analisis dapat disesuaikan.
+
+## B. CONVERSATIONAL AI ANALYTICS
+
+Buat interface chatbot AI yang terintegrasi langsung dengan Business Intelligence Engine.
+
+Pengguna dapat mengajukan pertanyaan menggunakan bahasa alami.
+
+Contoh pertanyaan:
+
+**Analisis Penjualan**
+- Berapa total penjualan bulan ini?
+- Berapa pertumbuhan penjualan dibanding bulan sebelumnya?
+- Produk apa yang paling banyak terjual?
+- Cabang mana yang memiliki penjualan tertinggi?
+- Bagaimana tren penjualan selama enam bulan terakhir?
+
+**Analisis Keuntungan**
+- Berapa total keuntungan perusahaan?
+- Produk mana yang memiliki margin keuntungan tertinggi?
+- Cabang mana yang paling menguntungkan?
+- Mengapa keuntungan mengalami penurunan?
+
+**Analisis Pelanggan**
+- Siapa pelanggan dengan transaksi terbesar?
+- Siapa pelanggan yang paling sering melakukan pembelian?
+- Bagaimana segmentasi pelanggan?
+- Pelanggan mana yang berpotensi tidak aktif?
+
+**Business Recommendation**
+- Strategi apa yang bisa meningkatkan penjualan?
+- Produk mana yang perlu diprioritaskan?
+- Cabang mana yang perlu dievaluasi?
+- Bagaimana cara meningkatkan profit margin?
+
+AI harus mampu:
+- Memahami pertanyaan pengguna.
+- Mengidentifikasi maksud analisis.
+- Menentukan sumber data yang dibutuhkan.
+- Memilih tool analisis yang sesuai.
+- Menjalankan query secara aman.
+- Menghitung hasil berdasarkan data aktual.
+- Menghasilkan insight.
+- Memberikan rekomendasi yang relevan.
+- Menampilkan sumber data dan periode analisis.
+- Mempertahankan konteks percakapan.
+
+AI tidak boleh mengarang angka, persentase, tren, atau hasil perhitungan.
+
+Jika data tidak tersedia, sampaikan keterbatasannya.
+
+## C. TEXT-TO-SQL ENGINE
+
+Buat sistem yang memungkinkan AI mengubah pertanyaan bahasa alami menjadi SQL query.
+
+Contoh:
+
+Pertanyaan:
+"Berapa total penjualan berdasarkan kategori produk?"
+
+Proses:
+1. AI memahami pertanyaan.
+2. Sistem membaca metadata database.
+3. Sistem mengidentifikasi tabel dan kolom yang relevan.
+4. AI menghasilkan SQL query.
+5. Backend memvalidasi query.
+6. Query dijalankan menggunakan database read-only.
+7. Hasil dikembalikan ke AI.
+8. AI menjelaskan hasil kepada pengguna.
+
+Ketentuan keamanan:
+- Gunakan database user dengan hak akses read-only untuk analisis.
+- Hanya izinkan SELECT dan operasi baca yang telah disetujui.
+- Blokir INSERT, UPDATE, DELETE, DROP, ALTER, TRUNCATE, dan statement berbahaya.
+- Gunakan query parameterization.
+- Batasi jumlah baris hasil.
+- Terapkan query timeout.
+- Validasi tabel dan kolom.
+- Terapkan isolasi data antar organisasi.
+- Catat query yang dijalankan dalam audit log.
+- Jangan memberikan kredensial database kepada LLM.
+
+Gunakan SQL parser atau validator yang sesuai, bukan hanya pemeriksaan teks sederhana.
+
+Buat mekanisme agar sistem dapat membaca struktur tabel secara dinamis melalui database introspection.
+
+## D. DATASET & DATA INTEGRATION
+
+Buat fitur import dataset yang fleksibel.
+
+Format yang didukung:
+- CSV.
+- Excel XLSX.
+- JSON.
+- PostgreSQL.
+- MySQL jika memungkinkan.
+- API eksternal.
+- Database lain melalui connector.
+
+Fitur:
+
+1. Upload dataset.
+2. Preview data sebelum import.
+3. Deteksi nama kolom.
+4. Deteksi tipe data.
+5. Deteksi nilai kosong.
+6. Deteksi duplikasi.
+7. Data cleaning.
+8. Data transformation.
+9. Column mapping.
+10. Data validation.
+11. Import ke PostgreSQL.
+12. Dataset versioning.
+13. Import history.
+14. Data synchronization.
+15. Dataset deletion sesuai hak akses.
+
+Sediakan sistem dynamic schema.
+
+Artinya:
+- Setiap dataset dapat memiliki struktur berbeda.
+- Nama tabel tidak boleh di-hardcode.
+- Kolom dapat berbeda antar dataset.
+- Dataset dapat ditambahkan kapan saja.
+- Sistem dapat mengenali struktur data secara otomatis.
+- AI dapat menggunakan metadata dataset untuk menentukan analisis.
+
+Pisahkan raw data, normalized data, metadata, dan analytical views.
+
+Jangan menganggap seluruh file CSV sebagai satu jenis tabel transaksi.
+
+## E. DATA PROFILING & SEMANTIC LAYER
+
+Buat Data Profiling Engine yang dapat memahami karakteristik dataset.
+
+Kemampuan:
+- Mengidentifikasi kolom tanggal.
+- Mengidentifikasi kolom nominal uang.
+- Mengidentifikasi kuantitas.
+- Mengidentifikasi harga jual.
+- Mengidentifikasi harga modal.
+- Mengidentifikasi produk.
+- Mengidentifikasi pelanggan.
+- Mengidentifikasi cabang.
+- Mengidentifikasi kategori.
+- Mengidentifikasi kemungkinan primary key.
+- Mengidentifikasi hubungan antar tabel.
+
+Buat Business Semantic Layer agar pengguna dapat mengonfigurasi arti setiap kolom.
+
+Contoh:
+- sales_amount = total penjualan.
+- cost_amount = harga pokok.
+- profit_amount = keuntungan.
+- quantity = jumlah produk terjual.
+- branch_name = nama cabang.
+- transaction_date = tanggal transaksi.
+
+Rumus KPI harus dapat dikonfigurasi.
+
+Contoh:
+- Revenue = total nilai penjualan.
+- Gross Profit = Revenue - Cost of Goods Sold.
+- Gross Profit Margin = Gross Profit / Revenue × 100%.
+- Sales Growth = (Current Period - Previous Period) / Previous Period × 100%.
+
+Pastikan rumus disesuaikan dengan definisi bisnis yang telah dikonfirmasi. Jangan menghitung keuntungan menggunakan data yang tidak memiliki informasi biaya.
+
+## F. DATA VISUALIZATION
+
+Gunakan Recharts atau ECharts.
+
+Dashboard harus menampilkan:
+
+1. Total Revenue.
+2. Total Profit.
+3. Profit Margin.
+4. Total Transactions.
+5. Total Products Sold.
+6. Average Transaction Value.
+7. Sales Growth.
+8. Best Performing Product.
+9. Best Performing Branch.
+10. Business Performance Overview.
+
+Jenis visualisasi:
+- Line Chart.
+- Bar Chart.
+- Pie Chart.
+- Area Chart.
+- Donut Chart.
+- Scatter Plot.
+- Heatmap jika diperlukan.
+- KPI Cards.
+- Comparison Chart.
+- Trend Chart.
+
+Setiap visualisasi harus:
+- Menggunakan data aktual dari database.
+- Memiliki filter tanggal.
+- Memiliki filter dataset.
+- Mendukung interaksi.
+- Memiliki tooltip.
+- Memiliki loading dan error state.
+- Responsif.
+
+Jangan menampilkan angka dummy sebagai hasil analisis aktual.
+
+Jika belum ada dataset, tampilkan empty state yang informatif.
+
+## G. PREDICTIVE ANALYTICS
+
+Buat kemampuan analisis prediktif.
+
+Fitur:
+- Sales Forecasting.
+- Revenue Forecasting.
+- Demand Forecasting jika data mendukung.
+- Trend Prediction.
+- Customer Segmentation.
+- Product Clustering.
+- Anomaly Detection.
+
+Gunakan metode statistik atau machine learning yang sesuai.
+
+Contoh:
+- Moving Average.
+- Exponential Smoothing.
+- Linear Regression.
+- K-Means Clustering.
+- Statistical Anomaly Detection.
+
+Sistem harus:
+- Memeriksa kelengkapan data sebelum melakukan prediksi.
+- Memilih metode sesuai karakteristik dataset.
+- Menampilkan periode prediksi.
+- Menampilkan hasil aktual dan prediksi secara terpisah.
+- Menampilkan tingkat ketidakpastian jika tersedia.
+- Menjelaskan keterbatasan model.
+
+Jangan memberikan prediksi jika jumlah data tidak memadai.
+
+## H. AI BUSINESS RECOMMENDATION
+
+Buat sistem rekomendasi bisnis berbasis data.
+
+Contoh:
+- Rekomendasi peningkatan penjualan.
+- Rekomendasi produk prioritas.
+- Rekomendasi pengelolaan stok.
+- Rekomendasi evaluasi cabang.
+- Rekomendasi strategi pemasaran.
+- Rekomendasi peningkatan profit margin.
+
+Setiap rekomendasi harus memiliki:
+1. Permasalahan yang ditemukan.
+2. Data pendukung.
+3. Analisis penyebab.
+4. Rekomendasi tindakan.
+5. Dampak yang diharapkan.
+6. Prioritas tindakan.
+7. Tingkat keyakinan jika dapat diukur.
+
+Bedakan fakta dari data, dugaan penyebab, dan rekomendasi AI.
+
+Jangan menyatakan hubungan sebab-akibat jika data hanya menunjukkan korelasi.
+
+## I. AUTOMATED REPORTING
+
+Buat fitur pembuatan laporan otomatis.
+
+Format:
+- PDF.
+- Excel XLSX.
+- CSV.
+- Dashboard report.
+
+Jenis laporan:
+- Sales Report.
+- Profit Report.
+- Product Performance Report.
+- Branch Performance Report.
+- Customer Analysis Report.
+- Monthly Business Report.
+- Executive Summary.
+
+Laporan harus memiliki:
+- Judul laporan.
+- Periode analisis.
+- Ringkasan eksekutif.
+- KPI.
+- Tabel analisis.
+- Grafik.
+- Insight.
+- Rekomendasi.
+- Waktu pembuatan laporan.
+
+## J. FILTER & DRILL-DOWN ANALYSIS
+
+Buat filter dinamis berdasarkan:
+- Dataset.
+- Periode.
+- Produk.
+- Kategori.
+- Cabang.
+- Wilayah.
+- Pelanggan.
+- Parameter lain yang tersedia.
+
+Pengguna dapat melakukan drill-down dari ringkasan menuju detail transaksi jika diizinkan.
+
+# 4. USER INTERFACE & DASHBOARD
+
+Buat desain modern, minimalis, dan profesional seperti platform SaaS Business Intelligence.
+
+Gunakan:
+- Clean layout.
+- Whitespace yang cukup.
+- Typography yang jelas.
+- Warna netral.
+- Sidebar navigation.
+- Responsive design.
+- Dark mode dan light mode jika memungkinkan.
+
+## A. Landing Page
+
+Buat landing page sebelum masuk ke dashboard.
+
+Bagian:
+- Navbar.
+- Logo.
+- Hero Section.
+- Product Overview.
+- Features.
+- How It Works.
+- Analytics Preview.
+- Call To Action.
+- Footer.
+
+Pada sisi kanan navbar sediakan:
+- Login Admin.
+- Login User.
+
+## B. Admin Dashboard
+
+Halaman:
+- Overview.
+- Dataset Management.
+- Data Source Management.
+- Data Profiling.
+- Semantic Model Configuration.
+- AI Configuration.
+- Prompt Management.
+- Analytics Management.
+- Report Management.
+- User Management.
+- Organization Management jika multi-tenant.
+- Audit Logs.
+- System Settings.
+
+## C. User Dashboard
+
+Halaman:
+- Business Overview.
+- AI Chat Assistant.
+- Sales Analytics.
+- Profit Analytics.
+- Product Analytics.
+- Branch Analytics.
+- Predictive Analytics.
+- Business Recommendations.
+- Reports.
+
+## D. AI Chat Interface
+
+Buat tampilan chatbot profesional.
+
+Fitur:
+- New Chat.
+- Conversation History.
+- Streaming Response.
+- Markdown Rendering.
+- Chart Rendering.
+- Table Rendering.
+- SQL Insight jika diizinkan.
+- Copy Response.
+- Regenerate Response.
+- Source Information.
+- Follow-up Questions.
+
+AI harus dapat mengembalikan respons dalam format terstruktur agar frontend dapat menampilkan teks, KPI, tabel, dan grafik.
+
+# 5. MULTI-DATASET & MULTI-ORGANIZATION
+
+Buat arsitektur yang memungkinkan sistem berkembang.
+
+Satu perusahaan dapat memiliki banyak dataset.
+
+Contoh:
+- Dataset penjualan.
+- Dataset pelanggan.
+- Dataset inventaris.
+- Dataset keuangan.
+- Dataset pemasaran.
+- Dataset cabang.
+
+Jangan mengasumsikan seluruh dataset memiliki struktur seragam.
+
+Buat mekanisme:
+- Dataset registry.
+- Schema metadata.
+- Column mapping.
+- Relationship mapping.
+- Semantic model.
+- Dataset access control.
+
+Jika sistem dikembangkan menjadi SaaS, gunakan organisasi sebagai batas isolasi data.
+
+Setiap organisasi harus memiliki:
+- Dataset sendiri.
+- Konfigurasi AI sendiri.
+- Hak akses sendiri.
+- Riwayat analisis sendiri.
+- Laporan sendiri.
+
+Pastikan tidak ada kebocoran data antar organisasi.
+
+# 6. DATABASE DESIGN
+
+Gunakan PostgreSQL.
+
+Rancang tabel berdasarkan kebutuhan.
+
+Contoh tabel utama:
+
+- users
+- roles
+- permissions
+- organizations
+- organization_members
+- datasets
+- dataset_versions
+- dataset_columns
+- data_sources
+- semantic_models
+- metric_definitions
+- dataset_relationships
+- conversations
+- messages
+- ai_providers
+- ai_models
+- prompt_templates
+- analysis_history
+- generated_reports
+- usage_logs
+- audit_logs
+- system_logs
+
+Tabel transaksi dan data bisnis harus dapat berkembang secara dinamis.
+
+Gunakan migration dan indexing.
+
+Pertimbangkan penggunaan schema terpisah atau strategi penyimpanan terisolasi sesuai kebutuhan dan skala sistem.
+
+Jangan membuat satu tabel universal yang mencampurkan seluruh jenis data bisnis tanpa desain yang jelas.
+
+# 7. AI ENGINE ARCHITECTURE
+
+Pisahkan AI Engine menjadi beberapa service.
+
+1. LLM Provider Service.
+2. Conversational AI Service.
+3. Intent Detection Service.
+4. Text-to-SQL Service.
+5. SQL Validation Service.
+6. Query Execution Service.
+7. Business Analytics Service.
+8. RAG Service.
+9. Insight Generation Service.
+10. Recommendation Service.
+11. Forecasting Service.
+12. Chart Generation Service.
+13. Reporting Service.
+14. Conversation Memory Service.
+
+Gunakan Agent Orchestrator untuk menentukan service mana yang dibutuhkan berdasarkan pertanyaan pengguna.
+
+Contoh alur:
+
+User Question
+→ Intent Detection
+→ Context Understanding
+→ Dataset Selection
+→ Tool Selection
+→ SQL / Analytics / RAG
+→ Result Validation
+→ AI Explanation
+→ Structured Response
+→ Frontend Visualization.
+
+Jangan membiarkan LLM melakukan perhitungan bisnis kritis tanpa validasi dari backend.
+
+Seluruh perhitungan numerik penting harus dilakukan menggunakan fungsi backend yang dapat diuji.
+
+# 8. SECURITY
+
+Terapkan:
+- JWT Authentication.
+- Password Hashing.
+- Role-Based Access Control.
+- Organization-Level Access Control.
+- API Rate Limiting.
+- Input Validation.
+- SQL Injection Prevention.
+- Secure File Upload.
+- Environment Variables.
+- Audit Logging.
+- CORS.
+- Helmet.
+- Query Timeout.
+- Read-only database connection untuk analytics.
+- Proteksi terhadap prompt injection.
+
+Jangan pernah:
+- Mengekspos API key.
+- Mengirim database credentials ke frontend.
+- Memberikan akses database administratif kepada AI.
+- Menjalankan SQL yang belum divalidasi.
+- Membiarkan pengguna melihat dataset yang bukan haknya.
+- Memasukkan data sensitif ke dalam GitHub.
+
+Buat .gitignore yang benar.
+
+Buat .env.example tanpa kredensial asli.
+
+# 9. STRUKTUR PROJECT
+
+Pisahkan frontend dan backend.
+
+Contoh:
+
+ai-business-intelligence/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── layouts/
+│   │   ├── modules/
+│   │   │   ├── dashboard/
+│   │   │   ├── ai-chat/
+│   │   │   ├── sales/
+│   │   │   ├── profit/
+│   │   │   ├── products/
+│   │   │   ├── branches/
+│   │   │   ├── datasets/
+│   │   │   ├── forecasting/
+│   │   │   ├── reports/
+│   │   │   └── settings/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── stores/
+│   │   └── utils/
+│   └── package.json
+│
+├── backend/
+│   ├── src/
+│   │   ├── modules/
+│   │   │   ├── auth/
+│   │   │   ├── users/
+│   │   │   ├── organizations/
+│   │   │   ├── datasets/
+│   │   │   ├── data-integration/
+│   │   │   ├── data-profiling/
+│   │   │   ├── semantic-layer/
+│   │   │   ├── ai-engine/
+│   │   │   ├── ai-providers/
+│   │   │   ├── conversations/
+│   │   │   ├── text-to-sql/
+│   │   │   ├── sql-validator/
+│   │   │   ├── business-analytics/
+│   │   │   ├── forecasting/
+│   │   │   ├── clustering/
+│   │   │   ├── anomaly-detection/
+│   │   │   ├── recommendations/
+│   │   │   ├── reporting/
+│   │   │   ├── audit/
+│   │   │   └── monitoring/
+│   │   ├── common/
+│   │   ├── config/
+│   │   └── main.ts
+│   └── package.json
+│
+├── database/
+│   ├── migrations/
+│   ├── schema/
+│   └── seeds/
+│
+├── storage/
+│   ├── uploads/
+│   └── reports/
+│
+├── docs/
+│   ├── architecture.md
+│   ├── database.md
+│   ├── api.md
+│   ├── deployment.md
+│   └── user-guide.md
+│
+├── .github/
+│   └── workflows/
+│
+├── .env.example
+├── .gitignore
+├── README.md
+├── planning.md
+└── prompt.md
+
+Struktur tersebut dapat dikembangkan sesuai kebutuhan. Jangan memaksakan seluruh logic masuk ke satu file.
+
+# 10. GITHUB INTEGRATION
+
+Project harus disiapkan untuk menggunakan GitHub sebagai version control utama.
+
+Ketentuan:
+
+1. Buat repository dengan struktur yang rapi.
+2. Buat README.md lengkap.
+3. Buat .gitignore.
+4. Buat .env.example.
+5. Jangan commit .env.
+6. Jangan commit API key.
+7. Jangan commit database credentials.
+8. Jangan commit dataset perusahaan yang bersifat rahasia.
+9. Gunakan branch main untuk production.
+10. Gunakan branch development untuk pengembangan jika diperlukan.
+
+Siapkan dokumentasi perintah Git:
+
+git init
+git add .
+git commit -m "Initial AI Business Intelligence project"
+git branch -M main
+git remote add origin <GITHUB_REPOSITORY_URL>
+git push -u origin main
+
+Jangan mengarang URL repository.
+
+Jika repository sudah tersedia, periksa remote terlebih dahulu agar tidak menimpa konfigurasi yang ada.
+
+Sediakan GitHub Actions untuk:
+- Frontend build.
+- Backend build.
+- Linting.
+- Automated testing.
+- Deployment workflow jika diperlukan.
+
+Jangan melakukan force push atau menghapus branch tanpa persetujuan.
+
+# 11. DEPLOYMENT & HOSTING
+
+Saya ingin aplikasi dapat di-deploy dengan biaya serendah mungkin.
+
+Prioritaskan layanan berikut:
+
+## A. GitHub
+Sebagai:
+- Source code repository.
+- Version control.
+- CI/CD.
+- GitHub Actions.
+
+## B. Cloudflare Pages
+Gunakan untuk hosting frontend React + Vite.
+
+Ketentuan:
+- Integrasikan dengan GitHub.
+- Konfigurasikan build command.
+- Konfigurasikan build output directory.
+- Gunakan environment variables untuk URL backend.
+- Gunakan custom domain jika tersedia.
+- Pastikan routing React berjalan dengan benar.
+- Buat konfigurasi SPA fallback jika diperlukan.
+
+## C. Backend Hosting – Render
+
+Gunakan Render sebagai pilihan awal untuk hosting Node.js/NestJS backend.
+
+Ketentuan:
+- Deploy dari GitHub.
+- Konfigurasi build command.
+- Konfigurasi start command.
+- Konfigurasi environment variables.
+- Konfigurasi CORS.
+- Konfigurasi health check.
+- Hubungkan backend dengan PostgreSQL.
+- Jangan mengandalkan penyimpanan filesystem sementara untuk data permanen.
+
+Buat deployment dapat dipindahkan ke VPS atau provider lain tanpa perubahan besar pada business logic.
+
+## D. PostgreSQL – Neon
+
+Gunakan Neon sebagai pilihan database PostgreSQL awal.
+
+Ketentuan:
+- Gunakan DATABASE_URL dari environment variable.
+- Jalankan database migration.
+- Gunakan connection pooling jika diperlukan.
+- Siapkan backup dan strategi pemulihan untuk production.
+- Jangan mengekspos database secara publik tanpa pembatasan.
+
+Supabase dapat menjadi alternatif jika dibutuhkan.
+
+## E. Cloudflare DNS & Security
+
+Siapkan:
+- Custom domain.
+- DNS records.
+- SSL/TLS.
+- HTTPS.
+- Security configuration.
+- API subdomain.
+- Frontend subdomain.
+
+Contoh:
+- www.example.com
+- app.example.com
+- api.example.com
+
+Jangan mengasumsikan domain sudah dimiliki.
+
+## F. GOOGLE SITES INTEGRATION
+
+Saya juga ingin menggunakan Google Sites sebagai website informasi produk.
+
+Google Sites digunakan untuk:
+- Profil platform AI Business Intelligence.
+- Informasi produk.
+- Penjelasan fitur.
+- Dokumentasi pengguna.
+- Panduan penggunaan.
+- Informasi kontak.
+- Tombol menuju aplikasi BI.
+
+Aplikasi utama tetap berjalan di Cloudflare Pages.
+
+Sediakan:
+- URL aplikasi yang akan dipasang di Google Sites.
+- Petunjuk embed menggunakan URL.
+- Pengujian kompatibilitas iframe.
+- Alternatif tombol Open Application jika iframe tidak dapat digunakan.
+
+Jangan mencoba menjalankan backend Node.js atau PostgreSQL di Google Sites.
+
+Jika diperlukan, buat halaman landing page utama langsung di React dan gunakan Google Sites sebagai portal tambahan.
+
+## G. ENVIRONMENT CONFIGURATION
+
+Buat contoh konfigurasi:
+
+DATABASE_URL=
+JWT_SECRET=
+OPENAI_API_KEY=
+GEMINI_API_KEY=
+AI_DEFAULT_PROVIDER=
+FRONTEND_URL=
+BACKEND_URL=
+CORS_ORIGINS=
+NODE_ENV=
+
+Pastikan seluruh konfigurasi memiliki validasi ketika aplikasi dijalankan.
+
+# 12. TESTING
+
+Buat testing untuk:
+- Authentication.
+- Dataset upload.
+- Dataset parsing.
+- Data profiling.
+- Column mapping.
+- KPI calculations.
+- Revenue analysis.
+- Profit calculations.
+- Text-to-SQL.
+- SQL validation.
+- Query execution.
+- AI response.
+- Chart generation.
+- Forecasting.
+- Reporting.
+- Role permissions.
+- Organization isolation.
+- Deployment health checks.
+
+Gunakan Jest atau Vitest.
+
+Pastikan hasil perhitungan diuji menggunakan dataset dengan hasil yang sudah diketahui.
+
+# 13. DEVELOPMENT ROADMAP
+
+Kerjakan secara bertahap.
+
+## PHASE 1 – Planning & Architecture
+- Analisis file project.
+- Analisis dataset.
+- Rancang database.
+- Rancang arsitektur backend.
+- Rancang frontend.
+- Rancang AI Engine.
+- Rancang deployment.
+
+Tampilkan rancangan kepada saya terlebih dahulu.
+
+JANGAN CODING SEBELUM MENDAPAT PERSETUJUAN.
+
+## PHASE 2 – Core Application
+- Setup backend.
+- Setup frontend.
+- Setup PostgreSQL.
+- Authentication.
+- User management.
+- Dashboard layout.
+- Landing page.
+
+## PHASE 3 – Data Integration
+- Dataset upload.
+- Parsing.
+- Data cleaning.
+- Dynamic schema.
+- Data profiling.
+- Semantic mapping.
+- Database storage.
+
+## PHASE 4 – Business Intelligence
+- Sales analytics.
+- Revenue analytics.
+- Profit analytics.
+- Product analytics.
+- Branch analytics.
+- KPI engine.
+- Visualization.
+- Filtering dan drill-down.
+
+## PHASE 5 – AI Intelligence
+- AI provider integration.
+- Conversational AI.
+- Text-to-SQL.
+- SQL validation.
+- AI analytics.
+- Business insights.
+- Business recommendations.
+
+## PHASE 6 – Advanced Analytics
+- Forecasting.
+- Clustering.
+- Anomaly detection.
+- Customer segmentation.
+- Predictive analytics.
+
+## PHASE 7 – Reporting
+- PDF export.
+- Excel export.
+- Automated reports.
+- Executive summary.
+
+## PHASE 8 – Deployment
+- Push project ke GitHub.
+- Setup GitHub Actions.
+- Deploy frontend ke Cloudflare Pages.
+- Deploy backend ke Render.
+- Setup PostgreSQL di Neon.
+- Setup Cloudflare DNS.
+- Setup Google Sites.
+- Test seluruh URL.
+- Test production environment.
+
+## PHASE 9 – Final Validation
+- Uji seluruh fitur.
+- Uji keamanan.
+- Uji performa.
+- Periksa penggunaan API AI.
+- Periksa database.
+- Periksa deployment.
+- Perbaiki bug.
+- Lengkapi dokumentasi.
+
+# 14. OUTPUT AKHIR YANG DIHARAPKAN
+
+Saya ingin mendapatkan aplikasi AI Business Intelligence yang benar-benar berfungsi.
+
+Minimal memiliki:
+
+1. Landing Page.
+2. Admin Dashboard.
+3. User Dashboard.
+4. Authentication.
+5. Dataset Management.
+6. Dynamic Database Integration.
+7. Data Profiling.
+8. Semantic Layer.
+9. Sales Analytics.
+10. Profit Analytics.
+11. Product Analytics.
+12. Branch Analytics.
+13. Conversational AI.
+14. Text-to-SQL.
+15. Business Insights.
+16. Business Recommendations.
+17. Predictive Analytics.
+18. Forecasting.
+19. Reporting Services.
+20. GitHub Integration.
+21. Cloudflare Deployment.
+22. PostgreSQL Database.
+23. Google Sites Integration.
+24. Dokumentasi lengkap.
+
+# 15. INSTRUKSI TERAKHIR
+
+Saya ingin project ini dikembangkan secara profesional dan bertahap.
+
+Utamakan:
+- Arsitektur modular.
+- Clean code.
+- Dynamic dataset.
+- Akurasi perhitungan.
+- Keamanan database.
+- Kualitas analisis AI.
+- User experience.
+- Kemudahan deployment.
+- Efisiensi biaya hosting.
+
+Jangan hanya membuat UI atau dashboard statis.
+
+Setiap fitur harus terhubung dengan backend dan database sesuai fungsinya.
+
+Jangan menggunakan angka dummy sebagai data aktual.
+
+Jika data belum tersedia, tampilkan empty state.
+
+Jangan mengarang hasil analisis atau rekomendasi tanpa data pendukung.
+
+Jangan menghapus file project yang sudah ada tanpa persetujuan.
+
+**LANGKAH PERTAMA:**
+
+Baca seluruh file perencanaan dan periksa dataset yang tersedia. Kemudian tampilkan:
+
+1. Analisis kebutuhan sistem.
+2. Rancangan arsitektur.
+3. Struktur folder.
+4. Database schema.
+5. Alur kerja AI Business Intelligence.
+6. Alur Text-to-SQL.
+7. Rancangan dashboard.
+8. Rencana deployment GitHub, Cloudflare, Render, Neon, dan Google Sites.
+9. Estimasi kebutuhan biaya operasional.
+
+Tunggu persetujuan saya sebelum mulai coding.
+
+Target akhir adalah platform AI Business Intelligence yang dapat membantu perusahaan menganalisis kondisi bisnis, menemukan peluang, mendeteksi permasalahan, dan mengambil keputusan berdasarkan data aktual.

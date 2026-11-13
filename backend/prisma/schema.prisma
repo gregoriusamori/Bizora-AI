@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String         @id @default(uuid()) @db.Uuid
+  email         String         @unique
+  passwordHash String         @map("password_hash")
+  name          String?
+  role          String         @default("user")
+  organizationId String?       @map("organization_id") @db.Uuid
+  organization  Organization? @relation(fields: [organizationId], references: [id])
+  createdAt     DateTime       @default(now()) @db.Timestamp(3)
+  updatedAt     DateTime       @updatedAt @db.Timestamp(3)
+
+  @@map("users")
+}
+
+model Organization {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  createdAt DateTime @default(now()) @db.Timestamp(3)
+  updatedAt DateTime @updatedAt @db.Timestamp(3)
+
+  users User[]
+  datasets Dataset[]
+
+  @@map("organizations")
+}
+
+model Dataset {
+  id            String         @id @default(uuid()) @db.Uuid
+  organizationId String?       @map("organization_id") @db.Uuid
+  organization  Organization? @relation(fields: [organizationId], references: [id])
+  name          String
+  sourceType    String
+  description   String?
+  createdAt     DateTime       @default(now()) @db.Timestamp(3)
+  updatedAt     DateTime       @updatedAt @db.Timestamp(3)
+
+  versions DatasetVersion[]
+  columns DatasetColumn[]
+  data     DatasetData[]
+  semanticModels SemanticModel[]
+}
+
+model DatasetVersion {
+  id          String   @id @default(uuid()) @db.Uuid
+  datasetId  String   @db.Uuid
+  version     Int      @default(1)
+  sourceHash String?
+  createdAt   DateTime @default(now()) @db.Timestamp(3)
+  dataset     Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+}
+
+model DatasetColumn {
+  id          String   @id @default(uuid()) @db.Uuid
+  datasetId  String   @db.Uuid
+  dataset    Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  columnName String
+  dataType    String
+  isNullable  Boolean  @default(true)
+  isPrimary   Boolean  @default(false)
+
+  @@unique([datasetId, columnName])
+}
+
+model DatasetData {
+  id         String   @id @default(uuid()) @db.Uuid
+  datasetId String   @db.Uuid
+  dataset   Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  rowData   Json
+  createdAt DateTime @default(now()) @db.Timestamp(3)
+}
+
+model SemanticModel {
+  id          String   @id @default(uuid()) @db.Uuid
+  datasetId  String   @db.Uuid
+  dataset    Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  mappings    SemanticMapping[]
+  metrics     MetricDefinition[]
+  createdAt   DateTime @default(now()) @db.Timestamp(3)
+  updatedAt   DateTime @updatedAt @db.Timestamp(3)
+}
+
+model SemanticMapping {
+  id              String   @id @default(uuid()) @db.Uuid
+  semanticModelId String  @db.Uuid
+  semanticModel  SemanticModel @relation(fields: [semanticModelId], references: [id], onDelete: Cascade)
+  sourceColumn   String
+  targetColumn   String
+  meaning        String
+  createdAt      DateTime @default(now()) @db.Timestamp(3)
+  updatedAt      DateTime @updatedAt @db.Timestamp(3)
+}
+
+model MetricDefinition {
+  id            String   @id @default(uuid()) @db.Uuid
+  semanticModelId String @db.Uuid
+  semanticModel SemanticModel @relation(fields: [semanticModelId], references: [id], onDelete: Cascade)
+  name          String
+  expression    String?
+  createdAt     DateTime @default(now()) @db.Timestamp(3)
+  updatedAt     DateTime @updatedAt @db.Timestamp(3)
+}
