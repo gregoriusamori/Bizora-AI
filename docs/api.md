@@ -111,6 +111,36 @@ Body `POST /reports/generate`:
 - `costColumn` opsional — profit hanya dihitung bila diisi
 - Laporan berisi: KPI, tabel analisis, insight (berlabel `Fakta:`), rekomendasi (berlabel `Saran:`), keterbatasan
 
+## Analytics (Dashboard)
+
+Semua endpoint memerlukan JWT dan menghitung dari data aktual dataset (tanpa data dummy).
+
+Badan request bersama (`AnalyzeDto`):
+
+```json
+{
+  "datasetId": "uuid",
+  "dateColumn": "transaction_date",
+  "revenueColumn": "sales_amount",
+  "costColumn": "cost_amount",
+  "groupColumn": "product_name",
+  "granularity": "monthly",
+  "startDate": "2025-01-01",
+  "endDate": "2025-12-31",
+  "topN": 10
+}
+```
+
+| Method | Path | Deskripsi |
+|---|---|---|
+| POST | `/analytics/overview` | KPI ringkasan + tren revenue + pertumbuhan |
+| POST | `/analytics/sales` | Analisis sales: tren, pertumbuhan per periode, insight |
+| POST | `/analytics/profit` | Analisis profit (`costColumn` wajib) |
+| POST | `/analytics/products` | Peringkat produk (`groupColumn` wajib, `topN` default 10) |
+| POST | `/analytics/branches` | Peringkat cabang/toko (`groupColumn` wajib) |
+
+Respons berisi `kpis`, `trend` (revenue/cost/profit per periode), `growth` (pertumbuhan %), `items` (peringkat kelompok + kontribusi %), `insights` (berlabel `Fakta:`), `saran` di dalam insights (berlabel `Saran:`), dan `limitations`. Kolom yang dikirim divalidasi terhadap metadata `dataset_columns` — kolom asing ditolak 400.
+
 ## Conversations / AI Chat
 
 Semua endpoint memerlukan JWT. Untuk analisis memerlukan `OPENAI_API_KEY` ter-set di backend; jika kosong, chat mengembalikan 503.
